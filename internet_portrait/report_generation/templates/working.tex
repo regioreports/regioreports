@@ -1,0 +1,62 @@
+{% autoescape on %}
+\documentclass[a4paper,14pt]{extarticle} 
+\usepackage[T1,T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{graphicx}
+\usepackage{geometry} 
+\geometry{left=2.5cm}
+\geometry{right=1cm}
+\geometry{top=2cm}
+\geometry{bottom=2cm}
+
+\begin{document}
+\begin{titlepage}
+\date{}
+\begin{center}
+{\huge \textbf{АНАЛИТИЧЕСКИЙ ОТЧЕТ}} \\
+\vspace{80mm}
+{\Huge \textbf{ Интернет-портрет региона \\ {{content}} } } \\
+\vspace{\baselineskip}
+{\large Выполнен студией Regio Reports\par }
+\vspace{\baselineskip}
+\vspace{\baselineskip}
+\vspace{\baselineskip}
+{Москва, {{date_report_generated}}}
+\end{center}
+\end{titlepage}
+\clearpage\maketitle
+\thispagestyle{empty}
+\newpage
+
+\addcontentsline{toc}{section}{Введение}
+\section*{Введение}
+Необходимость проводить анализ существующей ситуации в регионе возникает постоянно. В связи с этим на передний план выходят различные методики, такие как построение социально-экономического портрета региона, или, совершенно новая, – построение интернет-портрета. 
+Методика построения социокультурного портрета опирается на разработку трех основных направлений:
+\begin{itemize}
+\item выявление факторов, которые определяют индивидуальный облик каждого региона;
+\item изучение попарных сходств и различий регионов, смежных и отдаленных;
+\item сопоставлени их с факторами и тенденциями социокультурной эволюции;
+\end{itemize}
+
+Однако данный подход опирается на базу социальных исследований, проведение которых усложняется тремя обстоятельствами. Во-первых, в данный процесс вовлечено очень много людей. Во-вторых, методология составления опросников – весьма сложная процедура. В третьих, население неохотно отвечает на вопросы, что в свою очередь искажает результаты исследования. Кроме того, выборка участников опроса не всегда объективно отражает все слои населения. 
+
+Как решение данных проблем, на передний план выходят новые способы исследования особенностей региона, такие, как построение интернет-портрета региона.
+
+\chapter{Анализ информационного пространства}				
+%\addcontentsline{toc}{chapter}{Анализ информационного пространства}
+
+Проведем следующий анализ новостей за период от {{period_from}} до {{period_to}} в регионе {{content}}.
+\begin{itemize}
+	\item Количество новостей: {{number_of_news}}
+	\item Количество источников: {{number_of_sources}}
+	\item Наиболее важные события за данный период:
+	\begin{itemize}
+
+	{% for story in top_news %}
+       \item {{ story.title }}
+	{% endfor %}
+	\end{itemize}
+\end{itemize}
+\end{document}
+{% endautoescape %}

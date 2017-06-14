@@ -1,0 +1,131 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <title>Regio Reports</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+ <link rel="shortcut icon" href="{% static 'pics/favicon.ico' %}" type="image/x-icon">
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+.w3-sidenav a,.w3-sidenav h4 {font-weight:bold}
+input[type="date"]::-webkit-inner-spin-button {
+    opacity: 0
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background: url(https://cdn3.iconfinder.com/data/icons/linecons-free-vector-icons-pack/32/calendar-16.png) center/80% no-repeat;
+    color: rgba(0, 0, 0, 0);
+    opacity: 0.5
+}
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+    background: url(https://cdn3.iconfinder.com/data/icons/linecons-free-vector-icons-pack/32/calendar-16.png) center/80% no-repeat;
+    opacity: 0.8
+}
+</style>
+<body class="w3-light-grey w3-content" style="max-width:1600px">
+
+<!-- Sidenav/menu -->
+<nav class="w3-sidenav w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidenav"><br>
+  <div class="w3-container">
+    <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding" title="close menu">
+      <i class="fa fa-remove"></i>
+    </a>
+    <img src="{% static 'pics/globe.jpg' %}" style="width:45%;" class="w3-round"><br><br>
+    <h4 class="w3-padding-0"><b>REGIO Reports</b></h4>
+    <p class="w3-text-grey">By Ilona Papava</p>
+  </div>
+  <a href="index.html#portfolio" onclick="w3_close()" class="w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>REPORTS</a> 
+  <a href="index.html#customize" onclick="w3_close()" class="w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>CUSTOMIZE REPORTS</a> 
+  <a href="index.html#contact" onclick="w3_close()" class="w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>CONTACT</a>
+   
+  <div class="w3-section w3-padding-top w3-large">
+    <a href="#" class="w3-hover-white w3-hover-text-indigo w3-show-inline-block"><i class="fa fa-facebook-official"></i></a>
+    <a href="#" class="w3-hover-white w3-hover-text-light-blue w3-show-inline-block"><i class="fa fa-twitter"></i></a>
+    <a href="#" class="w3-hover-white w3-hover-text-indigo w3-show-inline-block"><i class="fa fa-linkedin"></i></a>
+  </div>
+</nav>
+
+<!-- Overlay effect when opening sidenav on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:300px">
+
+  <!-- Header -->
+  <header class="w3-container" id="portfolio">
+    <a href="#"><img src="{% static 'pics/globe.jpg' %}" style="width:65px;" class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
+    <span class="w3-opennav w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
+    <h1><b>Regional Trend Reports</b></h1>
+    <div class="w3-section w3-bottombar w3-padding-16">
+      <!--<span class="w3-margin-right">Фильтр:</span> -->
+      <button id="home_button" class="float-left submit-button" >Главная</button>
+
+      <script type="text/javascript">
+          document.getElementById("home_button").onclick = function () {
+              location.href = "/";
+          };
+      </script>
+      <button id="ready_reports" class="float-left submit-button" >Мои отчеты</button>
+
+      <script type="text/javascript">
+          document.getElementById("ready_reports").onclick = function () {
+              location.href = "reports_ready.html";
+          };
+      </script>
+    </div>
+  </header>
+  
+  <!-- Contact Section -->
+  <div class="w3-container w3-padding-large">
+   <table align="center" cellspacing="10">
+    <tr>
+        <th align="center">Название региона</th>
+        <th align="center">Дата создания отчета </th>
+        <th align="center">Статус</th>
+        <th align="center">Путь к скачиванию</th>
+    </tr>
+    {% for item in query_results %}
+    <tr> 
+        <td align="center">{{ item.region_name }}</td>
+        <td align="center">{{ item.date_created }}</td>
+        <td align="center">{{ item.status }}</td>
+        <td align="center">
+        <a href="{{ item.full_path }}" download>
+        Скачать отчет!
+        </a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+  </div>
+
+
+<!-- End page content -->
+</div>
+
+<script>
+// Script to open and close sidenav
+function w3_open() {
+    document.getElementById("mySidenav").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+}
+ 
+function w3_close() {
+    document.getElementById("mySidenav").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+}
+
+// Analytics
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-89471741-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>

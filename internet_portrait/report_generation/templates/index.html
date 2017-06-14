@@ -1,0 +1,249 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <title>Regio Reports</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+ <link rel="shortcut icon" href="{% static 'pics/favicon.ico' %}" type="image/x-icon">
+<style>
+#overlay {
+     visibility: hidden;
+     position: absolute;
+     left: 0px;
+     top: 0px;
+     width:100%;
+     height:100%;
+     text-align:center;
+     z-index: 1000;
+}
+#overlay div {
+     width:300px;
+     margin: 100px auto;
+     background-color: #fff;
+     border:1px solid #000;
+     padding:15px;
+     text-align:center;
+}
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+.w3-sidenav a,.w3-sidenav h4 {font-weight:bold}
+input[type="date"]::-webkit-inner-spin-button {
+    opacity: 0
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background: url(https://cdn3.iconfinder.com/data/icons/linecons-free-vector-icons-pack/32/calendar-16.png) center/80% no-repeat;
+    color: rgba(0, 0, 0, 0);
+    opacity: 0.5
+}
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+    background: url(https://cdn3.iconfinder.com/data/icons/linecons-free-vector-icons-pack/32/calendar-16.png) center/80% no-repeat;
+    opacity: 0.8
+}
+</style>
+<body class="w3-light-grey w3-content" style="max-width:1600px">
+
+<!-- Sidenav/menu -->
+<nav class="w3-sidenav w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidenav"><br>
+  <div class="w3-container">
+    <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding" title="close menu">
+      <i class="fa fa-remove"></i>
+    </a>
+    <img src="{% static 'pics/globe.jpg' %}" style="width:45%;" class="w3-round"><br><br>
+    <h4 class="w3-padding-0"><b>REGIO Reports</b></h4>
+    <p class="w3-text-grey">By Ilona Papava</p>
+  </div>
+  <a href="#portfolio" onclick="w3_close()" class="w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>REPORTS</a> 
+  <a href="#customize" onclick="w3_close()" class="w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>CUSTOMIZE REPORTS</a> 
+  <a href="#contact" onclick="w3_close()" class="w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>CONTACT</a>
+   
+  <div class="w3-section w3-padding-top w3-large">
+    <a href="#" class="w3-hover-white w3-hover-text-indigo w3-show-inline-block"><i class="fa fa-facebook-official"></i></a>
+    <a href="#" class="w3-hover-white w3-hover-text-light-blue w3-show-inline-block"><i class="fa fa-twitter"></i></a>
+    <a href="#" class="w3-hover-white w3-hover-text-indigo w3-show-inline-block"><i class="fa fa-linkedin"></i></a>
+  </div>
+</nav>
+
+<!-- Overlay effect when opening sidenav on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:300px">
+
+  <!-- Header -->
+  <header class="w3-container" id="portfolio">
+    <a href="#"><img src="{% static 'pics/globe.jpg' %}" style="width:65px;" class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
+    <span class="w3-opennav w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
+    <h1><b>Regional Trend Reports</b></h1>
+    <div class="w3-section w3-bottombar w3-padding-16">
+      <!--<span class="w3-margin-right">Фильтр:</span> -->
+      <button id="home_button" class="float-left submit-button" >Главная</button>
+
+      <script type="text/javascript">
+          document.getElementById("home_button").onclick = function () {
+              location.href = "index.html";
+          };
+      </script>
+      <button id="ready_reports" class="float-left submit-button" >Мои отчеты</button>
+
+      <script type="text/javascript">
+          document.getElementById("ready_reports").onclick = function () {
+              location.href = "reports_ready.html";
+          };
+      </script>
+    </div>
+  </header>
+  
+  <!-- First Photo Grid-->
+  <div class="w3-row-padding">
+
+    <div class="w3-third w3-container w3-margin-bottom">
+      <img src="{% static 'pics/salavat.jpg' %}" alt="Bashkortostan" style="width:100%" class="w3-hover-opacity">
+      <form action="{% url 'generate_report' %}" method="POST">
+      {% csrf_token %}
+
+      <div class="w3-container w3-white">
+        <input type="hidden" value='Республика Башкортостан' name="region">
+        <p><b>Республика Башкортостан</b></p>
+        <p>Башкортостан входит в состав Приволжского федерального округа, является частью Уральского экономического района. Столица — город Уфа. <p>Население: 4 066 972.</p>
+    <p>
+    <button type="submit"  class="w3-btn w3-dark-grey w3-padding-large w3-margin-top w3-margin-bottom">
+      <i class="fa fa-download w3-margin-right"></i>Скачать отчет
+    </button>
+    </p>
+      </div>
+      </form>
+    </div>
+
+    <div class="w3-third w3-container w3-margin-bottom">
+      <img src="{% static 'pics/kra.jpg' %}" alt="Krasnodar" style="width:100%" class="w3-hover-opacity">
+      <form action="{% url 'generate_report' %}" method="POST">
+      {% csrf_token %}      
+      <div class="w3-container w3-white">
+      <input type="hidden" value='Краснодарский край' name="region">
+        <p><b>Краснодарский край</b></p>
+        <p>Краснодарский край входит в состав Южного федерального округа, располагается на юго-западе Российской Федерации.
+        Административный центр — город Краснодар.
+        <p>
+        Население: 5 570 945.</p>
+    <p>
+    <button id="submit_region" type="submit" class="w3-btn w3-dark-grey w3-padding-large w3-margin-top w3-margin-bottom">
+      <i class="fa fa-download w3-margin-right"></i>Скачать отчет
+    </button>
+    </p>
+      </div>  
+      </form>
+    </div>
+
+    <div class="w3-third w3-container">
+      <img src="{% static 'pics/tomsk.jpg' %}" alt="Tomsk" style="width:100%" class="w3-hover-opacity">
+      <form action="{% url 'generate_report' %}" method="POST">
+      {% csrf_token %}
+      <div class="w3-container w3-white">
+          <input type="hidden" value='Томская область' name="region">
+          <p><b>Томская область</b></p>
+          <p> Томская область входит в состав Сибирского федерального округа. 
+          Административный центр — город Томск.
+          <p>
+          Население: 1 047 394.</p>
+        <p>
+        <button type="submit" class="w3-btn w3-dark-grey w3-padding-large w3-margin-top w3-margin-bottom">
+          <i class="fa fa-download w3-margin-right"></i>
+            Скачать отчет
+        </button>
+        </p>
+      </div>
+      </form>
+    </div>
+
+  </div>
+
+   <div class="w3-container w3-padding-32 w3-grey" id="customize"><big>Выбрать другой регион: </big>
+    <form action="{% url 'generate_report' %}" method="POST">
+    {% csrf_token %}
+    <select class="form-control" name="region">
+        {% for key, value in regionslist.items %}
+        <option value='{{value}}'> {{value}} </option>
+        {% endfor %}
+    </select>
+    <br/><br/>
+    Период:&nbsp  <input type="date" min=2017-18-04 name="date_from"> &nbsp до &nbsp
+    <input type="date" min=2017-18-04 name="date_to">
+    <br/><br/>
+    Язык:&nbsp
+    <select class="form-control" name="report_language">
+        <option value='Русский'> Русский </option>
+        <option value='English'> English </option>
+        <option value='Portuguese'> Portuguese </option>
+    </select>
+    <br/><br/>
+    Источники:&nbsp
+    <select class="form-control" name="report_sources">
+        <option value='Все'> Все </option>
+        <option value='Яндекс'> Яндекс-новости </option>
+        <option value='Авито'> Авито </option>
+    </select>
+    <br/>
+    <button type="submit" class="w3-btn w3-dark-grey w3-padding-large w3-margin-top w3-margin-bottom">
+      <i class="fa fa-download w3-margin-right"></i>Скачать отчет
+    </button>
+</form> 
+   </div>
+  
+  <!-- Contact Section -->
+  <div class="w3-container w3-padding-large">
+    <h4 id="contact"><b>Связаться с нами</b></h4>
+    <div class="w3-row-padding w3-center w3-padding-24" style="margin:0 -16px">
+      <div class="w3-third w3-dark-grey">
+        <p><i class="fa fa-envelope w3-xxlarge w3-text-light-grey"></i></p>
+        <p>ilonapapava@yandex.ru</p>
+      </div>
+      <div class="w3-third w3-teal">
+        <p><i class="fa fa-map-marker w3-xxlarge w3-text-light-grey"></i></p>
+        <p>Москва, Россия</p>
+      </div>
+      <div class="w3-third w3-dark-grey">
+        <p><i class="fa fa-phone w3-xxlarge w3-text-light-grey"></i></p>
+        <p>+79672993019</p>
+      </div>
+    </div>
+    <hr class="w3-opacity">
+    <form action="form.asp" target="_blank">
+      <div class="w3-group">
+        <label>Имя</label>
+        <input class="w3-input w3-border" type="text" name="Name" required>
+      </div>
+      <div class="w3-group">
+        <label>E-mail</label>
+        <input class="w3-input w3-border" type="text" name="Email" required>
+      </div>
+      <div class="w3-group">
+        <label>Сообщение</label>
+        <input class="w3-input w3-border" type="text" name="Message" required>
+      </div>
+      <button type="submit" class="w3-btn w3-padding-large w3-margin-bottom"><i class="fa fa-paper-plane w3-margin-right"></i>Отправить сообщение</button>
+    </form>
+  </div>
+
+
+
+<!-- End page content -->
+</div>
+
+<script>
+
+// Script to open and close sidenav
+function w3_open() {
+    document.getElementById("mySidenav").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+}
+ 
+function w3_close() {
+    document.getElementById("mySidenav").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+}
+
+</script>
+</body>
+</html>
